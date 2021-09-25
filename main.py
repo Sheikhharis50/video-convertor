@@ -1,23 +1,16 @@
-from converter import Converter
-conv = Converter()
+from handlers.convertor_handler import ConvertHandler
+from handlers.arguments_handler import ArgumentsHandler
+import os
 
-info = conv.probe('inputs/dummy.avi')
+# example:
+# python main.py -in test.avi
 
-print(info.format.format)
-
-# convert = conv.convert('test/test1.avi', 'test/test1.mp4', {
-#     'format': 'mp4',
-#     'audio': {
-#         'codec': 'aac',
-#         'samplerate': 11025,
-#         'channels': 2
-#     },
-#     'video': {
-#         'codec': 'hevc',
-#         'width': 720,
-#         'height': 400,
-#         'fps': 25
-#     }})
-
-# for timecode in convert:
-#     print(f'\rConverting ({timecode:.2f}) ...')
+if __name__ == "__main__":
+    args = ArgumentsHandler.get_arguments()
+    if not len(args):
+        exit(1)
+    filename = args[0]
+    c = ConvertHandler(filename)
+    if not c:
+        exit(1)
+    c.convert()

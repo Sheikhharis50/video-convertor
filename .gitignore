@@ -1,3 +1,7 @@
+# development
+__pycache__/
+.DS_Store
+
 # environment
 venv
 
